@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AUREA — Residencia de autor
+   SP FUMIGACION — Control de plagas y limpieza
    Coreografía de scroll: GSAP + ScrollTrigger + SplitText + Lenis
    ========================================================================== */
 (() => {
@@ -35,7 +35,7 @@
      ------------------------------------------------------------------------ */
   let lenis = null;
   if (!reduceMotion && window.Lenis) {
-    lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.05, wheelMultiplier: 0.65, touchMultiplier: 0.8, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -185,10 +185,10 @@
   }
 
   /* ------------------------------------------------------------------------
-     01 · HERO — la palabra AUREA como ventana que se abre
+     01 · HERO — la palabra SP como ventana que se abre
      ------------------------------------------------------------------------ */
   function heroOrigin() {
-    // Mide el trazo vertical de la «R» para que el zoom atraviese la letra.
+    // Mide el trazo vertical de la «P» para que el zoom atraviese la letra.
     const pin = $('.hero__pin');
     const text = $('.hero__mask-text');
     const probe = document.createElementNS(NS, 'svg');
@@ -198,8 +198,8 @@
     pin.appendChild(probe);
     let origin = '50% 50%';
     try {
-      const r = clone.getExtentOfChar(2);
-      if (r && r.width) origin = `${r.x + r.width * 0.2}px ${r.y + r.height * 0.52}px`;
+      const r = clone.getExtentOfChar(1);
+      if (r && r.width) origin = `${r.x + r.width * 0.22}px ${r.y + r.height * 0.52}px`;
     } catch (e) { /* se mantiene el centro */ }
     probe.remove();
     return origin;
@@ -212,9 +212,9 @@
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
-        end: '+=170%',
+        end: '+=260%',
         pin: '.hero__pin',
-        scrub: 1,
+        scrub: 2,
         invalidateOnRefresh: true,
       },
     });
@@ -267,9 +267,9 @@
       scrollTrigger: {
         trigger: '.exterior',
         start: 'top top',
-        end: () => '+=' + distance(),
+        end: () => '+=' + distance() * 1.6,
         pin: '.exterior__pin',
-        scrub: 1,
+        scrub: 2,
         invalidateOnRefresh: true,
         anticipatePin: 1,
       },
@@ -278,7 +278,7 @@
     gsap.to('.hs-progress__bar i', {
       scaleX: 1,
       ease: 'none',
-      scrollTrigger: { trigger: '.exterior', start: 'top top', end: () => '+=' + distance(), scrub: true, invalidateOnRefresh: true },
+      scrollTrigger: { trigger: '.exterior', start: 'top top', end: () => '+=' + distance() * 1.6, scrub: true, invalidateOnRefresh: true },
     });
 
     $$('.hs-panel').forEach((panel) => {
@@ -326,9 +326,9 @@
       scrollTrigger: {
         trigger: '.threshold',
         start: 'top top',
-        end: '+=190%',
+        end: '+=280%',
         pin: '.threshold__pin',
-        scrub: 1,
+        scrub: 2,
         invalidateOnRefresh: true,
       },
     })
@@ -397,10 +397,10 @@
      04 · ESTRUCTURA — axonometría explotada generada en SVG
      ------------------------------------------------------------------------ */
   const LEVELS = [
-    { code: 'N-1 · −1,20 m', name: 'Cimentación', offset: 78 },
-    { code: 'N0 · ±0,00 m', name: 'Planta baja', offset: 0 },
-    { code: 'N+1 · +4,20 m', name: 'Planta alta', offset: -86 },
-    { code: 'N+2 · +8,00 m', name: 'Cubierta', offset: -160 },
+    { code: 'Zona 1 · Barrera', name: 'Perímetro y subsuelo', offset: 78 },
+    { code: 'Zona 2 · Aspersión', name: 'Cocina y áreas comunes', offset: 0 },
+    { code: 'Zona 3 · Nebulización', name: 'Dormitorios y baños', offset: -86 },
+    { code: 'Zona 4 · Sellado', name: 'Techos y áticos', offset: -160 },
   ];
 
   function buildAxo(svg) {
@@ -571,9 +571,9 @@
       scrollTrigger: {
         trigger: '.structure',
         start: 'top top',
-        end: () => '+=' + window.innerHeight * (isMobile() ? 4.5 : 5.5),
+        end: () => '+=' + window.innerHeight * (isMobile() ? 6 : 7.5),
         pin: '.structure__pin',
-        scrub: 1,
+        scrub: 2,
         invalidateOnRefresh: true,
       },
       onUpdate: sync,
@@ -605,9 +605,30 @@
      05 · PLANOS — dibujo técnico que se traza con el scroll
      ------------------------------------------------------------------------ */
   const M2 = 0.035 * 0.035; // 1 unidad del plano = 3,5 cm
+  const TREATMENT = {
+    'Salón doble altura': 'Aspersión',
+    Comedor: 'Aspersión',
+    Cocina: 'Gel + cebo',
+    'Cine privado': 'Nebulización',
+    Bodega: 'Cebo roedores',
+    Servicio: 'Gel + cebo',
+    'Suite huéspedes': 'Vapor chinches',
+    Aseo: 'Desinfección',
+    Escalera: 'Aspersión',
+    'Hall de acceso': 'Aspersión',
+    'Vacío doble altura': '—',
+    'Suite principal': 'Vapor chinches',
+    Vestidor: 'Nebulización',
+    'Baño principal': 'Desinfección',
+    'Suite 2': 'Vapor chinches',
+    'Baño 2': 'Desinfección',
+    'Estudio y biblioteca': 'Antitermitas',
+    'Suite 3': 'Vapor chinches',
+  };
   const PLANS = {
     pb: {
       stamp: 'Planta baja · N0',
+      baits: [[-24, 60], [-24, 420], [220, 504], [560, 504], [944, 300], [944, 460], [944, 60], [700, -24]],
       rooms: [
         ['Salón doble altura', 0, 0, 400, 280],
         ['Comedor', 400, 0, 200, 280],
@@ -650,6 +671,7 @@
     },
     pa: {
       stamp: 'Planta alta · N+1',
+      baits: [[-24, 380], [944, 220], [944, 420]],
       rooms: [
         ['Vacío doble altura', 0, 0, 400, 280, 'void'],
         ['Suite principal', 400, 0, 300, 280],
@@ -690,7 +712,8 @@
     const svg = $('#plan');
     if (!svg) return;
     const list = $('.plans__rooms');
-    const totalEl = $('.plans__total b');
+    const totalEl = $('.plans__total:not(.plans__baits) b');
+    const baitsEl = $('.plans__baits b');
     const stampLevel = $('.plans__stamp-level');
     const OX = 60;
     const OY = 250;
@@ -791,7 +814,7 @@
 
         const li = document.createElement('li');
         li.dataset.room = idx;
-        li.innerHTML = `<span>${idx}</span><span>${name}</span><span>${isVoid ? '—' : fmt(area) + ' m²'}</span>`;
+        li.innerHTML = `<span>${idx}</span><span>${name}</span><span>${TREATMENT[name] || '—'}</span>`;
         list.appendChild(li);
 
         const on = () => { hit.classList.add('is-hover'); li.classList.add('is-hover'); };
@@ -844,6 +867,12 @@
       draw(gDim, 'M975,46 L966,76 L975,68 L984,76 Z', 'north');
       text(gDim, 975, 108, 'north-t', 'N');
 
+      (plan.baits || []).forEach(([bx, by]) => {
+        draw(gOpen, rectD(bx - 9, by - 9, 18, 18), 'bait');
+        draw(gOpen, `M${bx - 4},${by} L${bx + 4},${by} M${bx},${by - 4} L${bx},${by + 4}`, 'bait');
+      });
+      if (baitsEl) baitsEl.textContent = String((plan.baits || []).length);
+
       totalEl.textContent = `${Math.round(total)} m²`;
       stampLevel.textContent = plan.stamp;
       return svg;
@@ -864,7 +893,7 @@
       gsap.set(openings, { opacity: 0 });
       drawTween = gsap.timeline(fromScroll ? {
         defaults: { ease: 'none' },
-        scrollTrigger: { trigger: '.plans__sheet', start: 'top 82%', end: 'center 48%', scrub: 1 },
+        scrollTrigger: { trigger: '.plans__sheet', start: 'top 82%', end: 'center 48%', scrub: 2 },
       } : { defaults: { ease: 'power2.inOut' } });
       drawTween
         .to(openings, { opacity: 1, duration: 0.01 }, 0.15)
@@ -993,9 +1022,9 @@
       scrollTrigger: {
         trigger: '.gallery',
         start: 'top top',
-        end: '+=190%',
+        end: '+=280%',
         pin: '.gallery__pin',
-        scrub: 1,
+        scrub: 2,
         invalidateOnRefresh: true,
       },
     })

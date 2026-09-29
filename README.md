@@ -1,24 +1,24 @@
-# AUREA — Residencia de autor
+# SP FUMIGACION — Control de plagas y limpieza
 
-Página web inmersiva para presentar una residencia de lujo. La animación sigue al scroll de principio a fin y muestra el exterior, el interior, la estructura completa, los planos y la ficha técnica.
+Página web inmersiva para SP FUMIGACION: fumigación y control de plagas, desinfección y servicios de limpieza profesional. Las animaciones siguen al scroll de principio a fin, con desplazamiento suave y lento.
 
 ## Recorrido
 
 | # | Sección | Qué pasa al hacer scroll |
 |---|---------|--------------------------|
 | — | **Preloader** | Contador real (imágenes críticas + tipografías) y telón que se abre. |
-| 01 | **Hero** | La palabra *AUREA* es una ventana recortada sobre la foto; al bajar, el zoom atraviesa la «R» y revela la imagen completa. |
-| — | **Manifiesto** | Cada palabra se enciende al ritmo del scroll; imágenes flotantes en parallax. |
-| 02 | **Exterior** (características externas) | Recorrido horizontal fijado: fachada, piscina, jardines, terrazas, garaje y seguridad, con parallax interno y revelado por máscara. |
-| — | **Umbral** | Un arco se abre sobre la fachada y el interior invade la pantalla. |
-| 03 | **Interior** (características internas) | Imagen fija que se reescribe ambiente a ambiente (salón, cocina, suite, baños, biblioteca, cine). |
-| 04 | **Estructura completa** | Axonometría SVG generada por código: se traza, se despieza por niveles (cimentación → cubierta), destaca cada nivel y se vuelve a ensamblar. |
-| 05 | **Planos** | Planta baja y planta alta dibujadas con el scroll, con cuadro de áreas interactivo (hover sincronizado plano ↔ tabla). |
-| 06 | **Ficha técnica** | Contadores animados y tabla por categorías: externas, internas, estructura y sistemas. |
-| 07 | **Galería** | Una imagen a pantalla completa se reduce hasta formar una rejilla de 9 fotos. |
-| 08 | **Contacto** | Formulario de visita privada con validación y botones magnéticos. |
+| 01 | **Hero** | Las letras *SP* son una ventana recortada sobre la foto; al bajar, el zoom atraviesa la «P» y revela la imagen. |
+| — | **Compromiso** | Cada palabra se enciende al ritmo del scroll. |
+| 02 | **Fumigación** | Recorrido horizontal: cucarachas, roedores, termitas, chinches, mosquitos, hormigas/arañas/alacranes y aves. |
+| — | **Transición** | Un arco se abre: del control de plagas a la limpieza. |
+| 03 | **Limpieza** | Imagen fija que cambia por servicio: hogares, oficinas, desinfección, tanques, tapicería y post-obra. |
+| 04 | **Método** | Axonometría de una vivienda que se separa por zonas de tratamiento (perímetro, cocina, dormitorios, techos) con las fases inspección → diagnóstico → tratamiento → garantía. |
+| 05 | **Mapa de tratamiento** | Plano de ejemplo dibujado con el scroll, con el tratamiento de cada ambiente y las estaciones de cebo. |
+| 06 | **Cifras** | Contadores y tabla por categorías: fumigación, limpieza, seguridad y garantía. |
+| 07 | **Galería** | Una imagen a pantalla completa se reduce hasta formar una rejilla. |
+| 08 | **Contacto** | Formulario de inspección gratuita con selector de servicio. |
 
-Extras: scroll suave (Lenis), cursor personalizado, barra de progreso, indicador de sección, header que se oculta al bajar, menú móvil a pantalla completa, marquesina que reacciona a la velocidad del scroll y grano de película.
+> Las cifras (años, servicios, garantía, tiempos) y los textos son de ejemplo: ajústalos a los datos reales de la empresa. El formulario no envía datos a ningún servidor todavía.
 
 ## Tecnología
 
@@ -83,4 +83,4 @@ Para usar fotos propias, basta con reemplazar el `src` por la ruta local (por ej
 - Lenis: MIT (`assets/vendor/LICENSE-lenis.txt`).
 - Tipografías: SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
 - Fotografías: licencia de Unsplash.
-- AUREA es un proyecto conceptual: nombre, ubicación y cifras son ilustrativos.
+- Las fotos son de Unsplash (espacios de ejemplo); lo ideal es reemplazarlas por fotos reales de los trabajos de SP FUMIGACION.
