@@ -6,6 +6,7 @@
   <title>SP FUMIGACION — Control de plagas y limpieza</title>
   <meta name="description" content="SP FUMIGACION: fumigación y control de plagas (cucarachas, roedores, termitas, chinches, mosquitos), desinfección y servicios de limpieza profesional para hogares, empresas e industrias.">
   <meta name="theme-color" content="#080b0a">
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <meta property="og:type" content="website">
   <meta property="og:title" content="SP FUMIGACION — Control de plagas y limpieza">
   <meta property="og:description" content="Fumigación, desinfección y limpieza profesional con garantía por escrito.">
@@ -51,6 +52,10 @@
   <!-- ============ PRELOADER ============ -->
   <div class="loader" aria-hidden="true">
     <div class="loader__inner">
+      <svg class="loader__shield" viewBox="0 0 64 72" aria-hidden="true">
+        <path class="loader__shield-body" d="M32 3 L59 13 V33 C59 51 47 63 32 69 C17 63 5 51 5 33 V13 Z" pathLength="1"/>
+        <path class="loader__shield-check" d="M20 36 L29 45 L45 26" pathLength="1"/>
+      </svg>
       <div class="loader__brand"><span>S</span><span>P</span></div>
       <p class="loader__caption">Fumigación · Desinfección · Limpieza</p>
     </div>
@@ -119,6 +124,7 @@
                alt="Técnico de SP FUMIGACION con traje de protección en una habitación nebulizada"
                fetchpriority="high" decoding="async" data-critical>
         </div>
+        <canvas class="hero__fog" aria-hidden="true"></canvas>
         <div class="hero__shade"></div>
 
         <svg class="hero__mask" aria-hidden="true">
@@ -139,10 +145,16 @@
           <h1 class="sr-only">SP FUMIGACION — Fumigación, control de plagas y limpieza profesional</h1>
           <div class="hero__bottom">
             <p class="hero__claim">Tu espacio libre de <em>plagas</em>,<br>limpio y <em>protegido</em>.</p>
-            <div class="scroll-cue">
-              <span>Desliza para descubrir</span>
-              <span class="scroll-cue__line"><i></i></span>
-            </div>
+            <a class="seal" href="#fumigacion" data-link aria-label="Desliza para descubrir">
+              <svg class="seal__ring" viewBox="0 0 200 200" aria-hidden="true">
+                <defs><path id="sealPath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+                <text><textPath href="#sealPath" startOffset="0">SP FUMIGACION · CONTROL DE PLAGAS · GARANTÍA POR ESCRITO · </textPath></text>
+              </svg>
+              <svg class="seal__core" viewBox="0 0 64 72" aria-hidden="true">
+                <path d="M32 3 L59 13 V33 C59 51 47 63 32 69 C17 63 5 51 5 33 V13 Z"/>
+                <path d="M32 22 V48 M22 39 L32 49 L42 39"/>
+              </svg>
+            </a>
           </div>
         </div>
 

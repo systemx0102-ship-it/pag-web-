@@ -88,6 +88,7 @@
       setTimeout(() => { target = 1; }, 4500);
 
       gsap.from(letters, { yPercent: 110, duration: 1.2, ease: 'expo.out', stagger: 0.06 });
+      gsap.to('.loader__shield path', { strokeDashoffset: 0, duration: 1.3, ease: 'power2.inOut', stagger: 0.55 });
       gsap.from('.loader__caption, .loader__foot', { opacity: 0, y: 12, duration: 1, delay: 0.3 });
 
       const start = performance.now();
@@ -112,6 +113,7 @@
       const exit = () => {
         gsap.timeline({ onComplete: () => loader.remove() })
           .to(letters, { yPercent: -110, duration: 0.8, ease: 'expo.in', stagger: 0.045 })
+          .to('.loader__shield', { scale: 0.6, opacity: 0, duration: 0.7, ease: 'expo.in' }, '<')
           .to('.loader__caption, .loader__foot', { opacity: 0, duration: 0.4 }, '<')
           .to(loader, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.2, ease: 'expo.inOut' }, '-=0.2')
           .call(resolve, null, '-=0.85');
@@ -229,6 +231,94 @@
       .to({}, { duration: 0.25 });
   }
 
+  function initFog() {
+    const canvas = $('.hero__fog');
+    if (!canvas || reduceMotion) return;
+    const ctx = canvas.getContext('2d');
+    const sprite = document.createElement('canvas');
+    sprite.width = sprite.height = 128;
+    const sg = sprite.getContext('2d');
+    const grad = sg.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(205, 245, 222, 0.30)');
+    grad.addColorStop(0.5, 'rgba(120, 205, 160, 0.10)');
+    grad.addColorStop(1, 'rgba(120, 205, 160, 0)');
+    sg.fillStyle = grad;
+    sg.fillRect(0, 0, 128, 128);
+
+    const SCALE = 0.5; // se dibuja a media resolución: la niebla es difusa
+    const mouse = { x: -1e4, y: -1e4 };
+    const parts = [];
+    let w = 0;
+    let h = 0;
+    const resize = () => {
+      w = canvas.width = Math.max(1, Math.round(canvas.offsetWidth * SCALE));
+      h = canvas.height = Math.max(1, Math.round(canvas.offsetHeight * SCALE));
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    const count = isMobile() ? 16 : 30;
+    for (let i = 0; i < count; i += 1) {
+      const bvx = (Math.random() - 0.5) * 0.3;
+      parts.push({
+        x: Math.random() * w,
+        y: h * (0.2 + Math.random() * 0.9),
+        r: (0.18 + Math.random() * 0.32) * Math.max(w, h),
+        bvx,
+        vx: bvx,
+        vy: -(0.06 + Math.random() * 0.16),
+        a: 0.35 + Math.random() * 0.65,
+      });
+    }
+    $('.hero__pin').addEventListener('pointermove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = (e.clientX - r.left) * SCALE;
+      mouse.y = (e.clientY - r.top) * SCALE;
+    }, { passive: true });
+
+    const tick = () => {
+      ctx.clearRect(0, 0, w, h);
+      parts.forEach((p) => {
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const d2 = dx * dx + dy * dy;
+        const reach = p.r * 0.9;
+        if (d2 < reach * reach) {
+          const d = Math.sqrt(d2) || 1;
+          p.vx += (dx / d) * 0.35;
+          p.y += (dy / d) * 0.6;
+        }
+        p.vx += (p.bvx - p.vx) * 0.03;
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -p.r) { p.y = h + p.r; p.x = Math.random() * w; }
+        if (p.x < -p.r) p.x = w + p.r;
+        if (p.x > w + p.r) p.x = -p.r;
+        ctx.globalAlpha = p.a;
+        ctx.drawImage(sprite, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+      });
+    };
+    let running = false;
+    ScrollTrigger.create({
+      trigger: '.hero',
+      start: 'top bottom',
+      end: 'bottom top',
+      onToggle: (self) => {
+        if (self.isActive && !running) { gsap.ticker.add(tick); running = true; }
+        if (!self.isActive && running) { gsap.ticker.remove(tick); running = false; }
+      },
+    });
+  }
+
+  function initSeal() {
+    if (reduceMotion || !$('.seal__ring')) return;
+    gsap.to('.seal__ring', {
+      rotation: 540,
+      ease: 'none',
+      transformOrigin: '50% 50%',
+      scrollTrigger: { start: 0, end: 'max', scrub: 0.6 },
+    });
+  }
+
   function heroIntro() {
     if (reduceMotion) return;
     gsap.timeline()
@@ -256,7 +346,23 @@
   /* ------------------------------------------------------------------------
      02 · EXTERIOR — recorrido horizontal con parallax interno
      ------------------------------------------------------------------------ */
+  function addScanners() {
+    $$('.hs-panel').forEach((panel) => {
+      const media = $('.hs-panel__media', panel);
+      const name = ($('h3', panel) || {}).textContent || '';
+      const scan = document.createElement('div');
+      scan.className = 'scan';
+      scan.setAttribute('aria-hidden', 'true');
+      scan.innerHTML = '<span class="scan__corner scan__corner--tl"></span><span class="scan__corner scan__corner--tr"></span>'
+        + '<span class="scan__corner scan__corner--bl"></span><span class="scan__corner scan__corner--br"></span>'
+        + '<span class="scan__line"></span><span class="scan__tag"><i></i>Objetivo · ' + name + '</span>';
+      media.appendChild(scan);
+      if (reduceMotion) media.classList.add('is-scanned');
+    });
+  }
+
   function initExterior() {
+    addScanners();
     if (reduceMotion) return;
     const track = $('.hs-track');
     const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
@@ -284,6 +390,13 @@
     $$('.hs-panel').forEach((panel) => {
       const media = $('.hs-panel__media', panel);
       const img = $('img', panel);
+      ScrollTrigger.create({
+        trigger: panel,
+        containerAnimation: move,
+        start: 'left 62%',
+        onEnter: () => media.classList.add('is-scanned'),
+        onLeaveBack: () => media.classList.remove('is-scanned'),
+      });
       gsap.fromTo(media, { clipPath: 'inset(14% 10% 14% 10%)' }, {
         clipPath: 'inset(0% 0% 0% 0%)',
         ease: 'none',
@@ -1195,6 +1308,18 @@
       if (labelled) label.textContent = labelled.dataset.cursor;
     });
 
+    $$('.hs-panel__media, .interior__frame').forEach((el) => {
+      gsap.set(el, { transformPerspective: 900 });
+      const rx = gsap.quickTo(el, 'rotationX', { duration: 0.8, ease: 'power3' });
+      const ry = gsap.quickTo(el, 'rotationY', { duration: 0.8, ease: 'power3' });
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        ry(((e.clientX - r.left) / r.width - 0.5) * 8);
+        rx(-((e.clientY - r.top) / r.height - 0.5) * 8);
+      });
+      el.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    });
+
     $$('[data-magnetic]').forEach((el) => {
       const mx = gsap.quickTo(el, 'x', { duration: 0.8, ease: 'elastic.out(1, 0.4)' });
       const my = gsap.quickTo(el, 'y', { duration: 0.8, ease: 'elastic.out(1, 0.4)' });
@@ -1213,6 +1338,7 @@
   // Los disparadores se crean en el orden del documento para que cada
   // sección fijada (pin) desplace correctamente a las siguientes.
   initHero();
+  initFog();
   initManifesto();
   initExterior();
   initThreshold();
@@ -1228,6 +1354,7 @@
   initFades();
   initChrome();
   initCursor();
+  initSeal();
 
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
   window.addEventListener('load', () => ScrollTrigger.refresh());

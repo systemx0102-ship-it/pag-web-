@@ -47,13 +47,26 @@ python3 -m http.server 8080
 
 ## Versión de un solo archivo
 
-`dist/index.html` contiene toda la página en un único archivo (estilos, tipografías, librerías y scripts incrustados). Se abre con doble clic, sin servidor; solo las fotos se cargan desde internet.
+`dist/index.html` contiene toda la página en un único archivo (estilos, tipografías, librerías y scripts incrustados), protegido con contraseña. Se abre con doble clic, sin servidor; solo las fotos se cargan desde internet.
 
 Después de modificar `index.html` o cualquier archivo de `assets/`, regenérala con:
 
 ```bash
 python3 scripts/build_standalone.py
 ```
+
+## Página privada (con contraseña)
+
+`dist/index.html` se entrega **cifrado**: al abrirlo solo aparece una pantalla de acceso de SP FUMIGACION. El contenido va cifrado con AES-256-GCM y la clave se deriva de la contraseña (PBKDF2, 600.000 iteraciones), así que sin la contraseña no se puede leer la página ni su código, aunque alguien consiga el archivo. Una vez dentro, no la vuelve a pedir hasta cerrar la pestaña.
+
+La contraseña **no** se guarda en el repositorio. Para regenerar el archivo, o cambiar la contraseña:
+
+```bash
+python3 scripts/build_standalone.py
+SP_PASSWORD='tu-nueva-contraseña' node scripts/protect.mjs
+```
+
+Importante: esto protege el archivo `dist/index.html`. Los archivos fuente (`index.html`, `assets/`) están sin cifrar, así que el repositorio de GitHub debe ser **privado** (Settings → General → Danger Zone → Change repository visibility → Private). La página también incluye `noindex` para que los buscadores no la indexen.
 
 ## Publicar con GitHub Pages
 
