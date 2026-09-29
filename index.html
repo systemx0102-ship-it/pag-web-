@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="es" class="is-loading">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AUREA — Residencia de autor</title>
+  <meta name="description" content="AUREA, residencia de autor: características externas e internas, estructura completa, planos y ficha técnica en una experiencia inmersiva guiada por el scroll.">
+  <meta name="theme-color" content="#0b0a09">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AUREA — Residencia de autor">
+  <meta property="og:description" content="Arquitectura suspendida entre el bosque y la luz. Exterior, interior y estructura completa.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0a09'/%3E%3Cpath d='M16 6 L26 26 H6 Z' fill='none' stroke='%23c9a46c' stroke-width='2'/%3E%3Cpath d='M10.5 19.5 H21.5' stroke='%23c9a46c' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    /* Marca JS y cadena de respaldo de imágenes: si una foto no carga,
+       prueba la siguiente de data-fallback; si ninguna carga, deja el degradado. */
+    document.documentElement.classList.add('js');
+    (function () {
+      function build(id, w) {
+        return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + w + '&q=80';
+      }
+      document.addEventListener('error', function (e) {
+        var img = e.target;
+        if (!img || img.tagName !== 'IMG' || !img.hasAttribute('data-fallback')) return;
+        var list = img.getAttribute('data-fallback').split(',');
+        var i = parseInt(img.getAttribute('data-fb-i') || '0', 10);
+        var m = (img.getAttribute('src') || '').match(/[?&]w=(\d+)/);
+        if (i < list.length) {
+          img.setAttribute('data-fb-i', i + 1);
+          img.src = build(list[i].trim(), m ? m[1] : 1600);
+        } else {
+          img.classList.add('is-broken');
+          img.dispatchEvent(new Event('fallbackexhausted'));
+        }
+      }, true);
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__brand"><span>A</span><span>U</span><span>R</span><span>E</span><span>A</span></div>
+      <p class="loader__caption">Residencia de autor</p>
+    </div>
+    <div class="loader__foot">
+      <span class="loader__label">Preparando la experiencia</span>
+      <span class="loader__count"><span class="loader__num">000</span></span>
+    </div>
+    <div class="loader__bar"><i></i></div>
+  </div>
+
+  <!-- ============ UI FIJA ============ -->
+  <header class="site-header" data-header>
+    <a href="#inicio" class="brand" data-link aria-label="AUREA, volver al inicio">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 L28 27 H4 Z"/><path d="M9.6 19.4 H22.4"/></svg>
+      <span class="brand__name">AUREA</span>
+    </a>
+    <nav class="site-nav" aria-label="Secciones">
+      <a href="#exterior" data-link>Exterior</a>
+      <a href="#interior" data-link>Interior</a>
+      <a href="#estructura" data-link>Estructura</a>
+      <a href="#planos" data-link>Planos</a>
+      <a href="#ficha" data-link>Ficha técnica</a>
+      <a href="#galeria" data-link>Galería</a>
+    </nav>
+    <a href="#contacto" class="btn btn--ghost site-header__cta" data-link data-magnetic><span>Agendar visita</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="menu-toggle__line"></span><span class="menu-toggle__line"></span>
+      <span class="sr-only">Abrir menú</span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Menú móvil">
+      <a href="#exterior" data-link><small>02</small>Exterior</a>
+      <a href="#interior" data-link><small>03</small>Interior</a>
+      <a href="#estructura" data-link><small>04</small>Estructura</a>
+      <a href="#planos" data-link><small>05</small>Planos</a>
+      <a href="#ficha" data-link><small>06</small>Ficha técnica</a>
+      <a href="#galeria" data-link><small>07</small>Galería</a>
+      <a href="#contacto" data-link><small>08</small>Contacto</a>
+    </nav>
+  </div>
+
+  <div class="progress" aria-hidden="true"><i></i></div>
+
+  <aside class="hud" aria-hidden="true">
+    <span class="hud__index">01</span>
+    <span class="hud__line"><i></i></span>
+    <span class="hud__label">Inicio</span>
+  </aside>
+
+  <div class="cursor is-hidden" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"><span class="cursor__label"></span></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main id="main">
+
+    <!-- ============ 01 · HERO ============ -->
+    <section class="hero" id="inicio" data-section="Inicio" data-index="01">
+      <div class="hero__pin">
+        <div class="hero__media media">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80"
+               data-fallback="1613490493576-7fde63acd811,1512917774080-9991f1c4c750"
+               alt="Residencia contemporánea iluminada al atardecer, con piscina en primer plano"
+               fetchpriority="high" decoding="async" data-critical>
+        </div>
+        <div class="hero__shade"></div>
+
+        <svg class="hero__mask" aria-hidden="true">
+          <defs>
+            <mask id="heroMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
+              <rect x="0" y="0" width="100%" height="100%" fill="#fff"/>
+              <text class="hero__mask-text" x="50%" y="50%" text-anchor="middle" dominant-baseline="central">AUREA</text>
+            </mask>
+          </defs>
+          <rect class="hero__mask-fill" x="0" y="0" width="100%" height="100%" mask="url(#heroMask)"/>
+        </svg>
+
+        <div class="hero__ui">
+          <div class="hero__top">
+            <p class="hero__kicker"><span class="dot"></span>Residencia de autor · N.º 01</p>
+            <p class="hero__kicker hero__kicker--right">Reserva Valle Alto<br>Entrega 2027</p>
+          </div>
+          <h1 class="sr-only">AUREA — Residencia de autor</h1>
+          <div class="hero__bottom">
+            <p class="hero__claim">Una arquitectura suspendida<br>entre el <em>bosque</em> y la <em>luz</em>.</p>
+            <div class="scroll-cue">
+              <span>Desliza para entrar</span>
+              <span class="scroll-cue__line"><i></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__reveal">
+          <p class="eyebrow eyebrow--light">Residencia AUREA</p>
+          <p class="hero__reveal-title">1.240 m² de arquitectura<br><em>sin concesiones.</em></p>
+          <ul class="hero__facts">
+            <li><b>4</b> suites</li>
+            <li><b>25 m</b> piscina infinita</li>
+            <li><b>3.500 m²</b> de terreno</li>
+            <li><b>A+</b> eficiencia energética</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MANIFIESTO ============ -->
+    <section class="manifesto" aria-labelledby="manifesto-title">
+      <div class="manifesto__float manifesto__float--a media" data-speed="-0.25">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+             data-fallback="1564013799919-ab600027ffc6,1512917774080-9991f1c4c750"
+             alt="Detalle de la volumetría exterior de la residencia" loading="lazy" decoding="async">
+      </div>
+      <div class="manifesto__float manifesto__float--b media" data-speed="0.2">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=80"
+             data-fallback="1502672260266-1c1ef2d93688,1522708323590-d24dbb6b0267"
+             alt="Interior sereno con luz natural" loading="lazy" decoding="async">
+      </div>
+      <div class="container">
+        <p class="eyebrow" id="manifesto-title">Manifiesto</p>
+        <p class="manifesto__text" data-words>
+          No construimos casas. Esculpimos <em>luz, materia y silencio</em>. AUREA es un objeto arquitectónico
+          donde el hormigón respira, la madera envejece con nobleza y el vidrio convierte el paisaje
+          en el muro más valioso de la casa.
+        </p>
+        <div class="manifesto__sign">
+          <span class="line"></span>
+          <p>Estudio AUREA · Arquitectura &amp; Ingeniería</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 · EXTERIOR (scroll horizontal) ============ -->
+    <section class="exterior" id="exterior" data-section="Exterior" data-index="02" aria-labelledby="exterior-title">
+      <div class="exterior__pin">
+        <div class="hs-track">
+          <div class="hs-intro">
+            <p class="eyebrow">(02) — Características externas</p>
+            <h2 class="display" id="exterior-title" data-split>El exterior, <em>esculpido</em> en el paisaje.</h2>
+            <p class="lead">Seis gestos arquitectónicos que ordenan el terreno: fachada, agua, jardín, terrazas, llegada y perímetro.</p>
+            <p class="hs-hint">Sigue deslizando <span aria-hidden="true">→</span></p>
+          </div>
+
+          <article class="hs-panel">
+            <figure class="hs-panel__media media" data-cursor="Ver">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80"
+                   data-fallback="1605276374104-dee2a0ed3cd6,1564013799919-ab600027ffc6,1512917774080-9991f1c4c750"
+                   alt="Fachada contemporánea de hormigón, madera y grandes paños de vidrio" loading="lazy" decoding="async">
+            </figure>
+            <div class="hs-panel__body">
+              <span class="hs-panel__num">E.01</span>
+              <h3>Fachada escultórica</h3>
+              <p>Hormigón arquitectónico visto, lamas de teca termotratada y travertino apomazado. Una piel que filtra la luz y cambia de carácter con cada hora del día.</p>
+              <ul class="spec-list">
+                <li><span>Frente</span><b>38 m</b></li>
+                <li><span>Vidrio</span><b>Triple low-e</b></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="hs-panel hs-panel--tall">
+            <figure class="hs-panel__media media" data-cursor="Ver">
+              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80"
+                   data-fallback="1613977257363-707ba9348227,1600596542815-ffad4c1539a9,1512917774080-9991f1c4c750"
+                   alt="Piscina de borde infinito frente a la residencia" loading="lazy" decoding="async">
+            </figure>
+            <div class="hs-panel__body">
+              <span class="hs-panel__num">E.02</span>
+              <h3>Piscina infinita</h3>
+              <p>25 metros de lámina de agua desbordante, climatizada por geotermia e iluminada con LED subacuático regulable. El horizonte continúa dentro de la casa.</p>
+              <ul class="spec-list">
+                <li><span>Dimensión</span><b>25 × 3,5 m</b></li>
+                <li><span>Agua</span><b>28 °C todo el año</b></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="hs-panel">
+            <figure class="hs-panel__media media" data-cursor="Ver">
+              <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1400&q=80"
+                   data-fallback="1564013799919-ab600027ffc6,1580587771525-78b9dba3b914"
+                   alt="Jardín y césped frente a una residencia moderna" loading="lazy" decoding="async">
+            </figure>
+            <div class="hs-panel__body">
+              <span class="hs-panel__num">E.03</span>
+              <h3>Jardines de autor</h3>
+              <p>Paisajismo con especies nativas, un bosque de 120 árboles y riego por goteo gestionado por sensores de humedad. Un jardín que se cuida solo.</p>
+              <ul class="spec-list">
+                <li><span>Terreno</span><b>3.500 m²</b></li>
+                <li><span>Árboles</span><b>120 nativos</b></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="hs-panel hs-panel--tall">
+            <figure class="hs-panel__media media" data-cursor="Ver">
+              <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80"
+                   data-fallback="1600596542815-ffad4c1539a9,1512917774080-9991f1c4c750"
+                   alt="Terraza exterior con zona de estar junto a la piscina" loading="lazy" decoding="async">
+            </figure>
+            <div class="hs-panel__body">
+              <span class="hs-panel__num">E.04</span>
+              <h3>Terrazas y rooftop</h3>
+              <p>280 m² de terrazas a tres niveles, cocina exterior, fogata y pérgola bioclimática motorizada. Vida al aire libre en cualquier estación.</p>
+              <ul class="spec-list">
+                <li><span>Terrazas</span><b>280 m²</b></li>
+                <li><span>Pérgola</span><b>Bioclimática</b></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="hs-panel">
+            <figure class="hs-panel__media media" data-cursor="Ver">
+              <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1400&q=80"
+                   data-fallback="1580587771525-78b9dba3b914,1600585154340-be6161a56a0c,1564013799919-ab600027ffc6"
+                   alt="Acceso principal a la residencia con camino de piedra" loading="lazy" decoding="async">
+            </figure>
+            <div class="hs-panel__body">
+              <span class="hs-panel__num">E.05</span>
+              <h3>Llegada y garaje</h3>
+              <p>Un camino de piedra conduce a un portón pivotante de 4 metros. Garaje para cuatro vehículos con dos cargadores eléctricos de 22 kW.</p>
+              <ul class="spec-list">
+                <li><span>Garaje</span><b>4 vehículos</b></li>
+                <li><span>Carga EV</span><b>2 × 22 kW</b></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="hs-panel hs-panel--tall">
+            <figure class="hs-panel__media media" data-cursor="Ver">
+              <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=80"
+                   data-fallback="1600596542815-ffad4c1539a9,1613490493576-7fde63acd811"
+                   alt="La residencia iluminada durante la noche" loading="lazy" decoding="async">
+            </figure>
+            <div class="hs-panel__body">
+              <span class="hs-panel__num">E.06</span>
+              <h3>Perímetro inteligente</h3>
+              <p>Cámaras 4K con analítica, control biométrico, iluminación perimetral escénica y sensores de intrusión integrados en el paisajismo.</p>
+              <ul class="spec-list">
+                <li><span>Vigilancia</span><b>CCTV 4K 24/7</b></li>
+                <li><span>Acceso</span><b>Biométrico</b></li>
+              </ul>
+            </div>
+          </article>
+
+          <div class="hs-outro">
+            <p class="hs-outro__big">6<span>gestos</span></p>
+            <p class="lead">Afuera, la casa se funde con el terreno. Adentro, comienza otra historia.</p>
+          </div>
+        </div>
+
+        <div class="hs-progress" aria-hidden="true">
+          <span class="hs-progress__bar"><i></i></span>
+          <span class="hs-progress__count">E.01 — E.06</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ UMBRAL (transición exterior → interior) ============ -->
+    <section class="threshold" aria-label="Transición del exterior al interior" data-section="Umbral" data-index="03" data-nav="interior">
+      <div class="threshold__pin">
+        <div class="threshold__outer media">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=80"
+               data-fallback="1613490493576-7fde63acd811,1600585154340-be6161a56a0c"
+               alt="Vista exterior de la residencia" loading="lazy" decoding="async">
+        </div>
+        <div class="threshold__inner media">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80"
+               data-fallback="1600607687939-ce8a6c25118c,1502672260266-1c1ef2d93688"
+               alt="Salón interior luminoso visto a través del umbral" loading="lazy" decoding="async">
+        </div>
+        <div class="threshold__copy threshold__copy--in">
+          <p class="eyebrow eyebrow--light">Umbral</p>
+          <h2 class="display">Cruzar el <em>umbral</em></h2>
+        </div>
+        <div class="threshold__copy threshold__copy--out">
+          <h2 class="display">Donde la luz<br>se vuelve <em>espacio</em>.</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · INTERIOR (sticky + reveals) ============ -->
+    <section class="interior" id="interior" data-section="Interior" data-index="03" aria-labelledby="interior-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">(03) — Características internas</p>
+          <h2 class="display" id="interior-title" data-split>El interior, <em>habitado</em> por la luz.</h2>
+          <p class="lead">Seis ambientes concebidos como piezas únicas. Materiales nobles, proporciones generosas y tecnología invisible.</p>
+        </header>
+      </div>
+
+      <div class="interior__grid">
+        <div class="interior__visual">
+          <div class="interior__frame">
+            <figure class="interior__img media is-first">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80"
+                   data-fallback="1618221195710-dd6b41faaea6,1502672260266-1c1ef2d93688"
+                   alt="Salón principal de doble altura con grandes ventanales" loading="lazy" decoding="async">
+            </figure>
+            <figure class="interior__img media">
+              <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1600&q=80"
+                   data-fallback="1600566753190-17f0baa2a6c3,1556912173-3bb406ef7e77,1600585154526-990dced4db0d"
+                   alt="Cocina de autor con isla central de mármol" loading="lazy" decoding="async">
+            </figure>
+            <figure class="interior__img media">
+              <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80"
+                   data-fallback="1505693416388-ac5ce068fe85,1522771739844-6a9f6d5f14af"
+                   alt="Suite principal con cama amplia y luz natural" loading="lazy" decoding="async">
+            </figure>
+            <figure class="interior__img media">
+              <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1600&q=80"
+                   data-fallback="1584622650111-993a426fbf0a,1620626011761-996317b8d101"
+                   alt="Baño tipo spa con acabados en piedra" loading="lazy" decoding="async">
+            </figure>
+            <figure class="interior__img media">
+              <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=80"
+                   data-fallback="1600210492486-724fe5c67fb0,1522708323590-d24dbb6b0267"
+                   alt="Biblioteca con estanterías de piso a techo" loading="lazy" decoding="async">
+            </figure>
+            <figure class="interior__img media">
+              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=80"
+                   data-fallback="1600607687644-c7171b42498f,1522708323590-d24dbb6b0267"
+                   alt="Sala de estar y bienestar con iluminación cálida" loading="lazy" decoding="async">
+            </figure>
+            <div class="interior__counter"><span class="interior__current">01</span> / 06</div>
+          </div>
+        </div>
+
+        <div class="interior__list">
+          <article class="room is-active">
+            <span class="room__num">I.01</span>
+            <h3 class="room__title">Salón de doble altura</h3>
+            <p>Un volumen de 7,4 metros de altura presidido por una chimenea de piedra suspendida y un ventanal de 12 metros que enmarca el valle.</p>
+            <ul class="room__features">
+              <li>Suelo de roble europeo en espiga</li>
+              <li>Chimenea de bioetanol suspendida</li>
+              <li>Ventanal corredizo de 12 m sin perfil</li>
+            </ul>
+            <p class="room__area"><b>137</b> m²</p>
+          </article>
+
+          <article class="room">
+            <span class="room__num">I.02</span>
+            <h3 class="room__title">Cocina de autor</h3>
+            <p>Isla monolítica de mármol Calacatta de cinco metros, electrodomésticos integrados y una despensa oculta tras paneles de nogal.</p>
+            <ul class="room__features">
+              <li>Isla de mármol Calacatta de 5 m</li>
+              <li>Bodega climatizada de 600 botellas</li>
+              <li>Office y cocina de servicio independientes</li>
+            </ul>
+            <p class="room__area"><b>78</b> m²</p>
+          </article>
+
+          <article class="room">
+            <span class="room__num">I.03</span>
+            <h3 class="room__title">Suite principal</h3>
+            <p>Un refugio en voladizo sobre el jardín, con vestidor de 32 m², terraza privada y escenas de iluminación que acompañan el ritmo circadiano.</p>
+            <ul class="room__features">
+              <li>Vestidor iluminado de 32 m²</li>
+              <li>Cortinas y blackout motorizados</li>
+              <li>Terraza privada con vista al valle</li>
+            </ul>
+            <p class="room__area"><b>103</b> m²</p>
+          </article>
+
+          <article class="room">
+            <span class="room__num">I.04</span>
+            <h3 class="room__title">Baños tipo spa</h3>
+            <p>Piedra natural, bañera exenta esculpida en una sola pieza, ducha de lluvia y sauna seca. El agua como ritual cotidiano.</p>
+            <ul class="room__features">
+              <li>Bañera exenta de piedra maciza</li>
+              <li>Ducha de lluvia y cromoterapia</li>
+              <li>Suelo radiante y toalleros térmicos</li>
+            </ul>
+            <p class="room__area"><b>43</b> m²</p>
+          </article>
+
+          <article class="room">
+            <span class="room__num">I.05</span>
+            <h3 class="room__title">Estudio y biblioteca</h3>
+            <p>Estanterías de nogal a medida de piso a techo, tratamiento acústico y luz norte constante: el lugar perfecto para pensar.</p>
+            <ul class="room__features">
+              <li>Carpintería de nogal a medida</li>
+              <li>Paneles acústicos integrados</li>
+              <li>Iluminación de lectura regulable</li>
+            </ul>
+            <p class="room__area"><b>64</b> m²</p>
+          </article>
+
+          <article class="room">
+            <span class="room__num">I.06</span>
+            <h3 class="room__title">Bienestar y cine</h3>
+            <p>Cine privado de 12 butacas con sonido envolvente, gimnasio con vista al bosque y una sala de estar para desconectar.</p>
+            <ul class="room__features">
+              <li>Cine con sonido Dolby Atmos 9.2.4</li>
+              <li>Gimnasio equipado con vista al bosque</li>
+              <li>Domótica KNX con control por voz</li>
+            </ul>
+            <p class="room__area"><b>55</b> m²</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · ESTRUCTURA COMPLETA (axonometría explotada) ============ -->
+    <section class="structure" id="estructura" data-section="Estructura" data-index="04" aria-labelledby="structure-title">
+      <div class="structure__pin">
+        <div class="structure__grid-bg" aria-hidden="true"></div>
+
+        <header class="structure__head">
+          <p class="eyebrow">(04) — Estructura completa</p>
+          <h2 class="display" id="structure-title">Anatomía de una <em>obra</em>.</h2>
+        </header>
+
+        <div class="structure__stage">
+          <svg class="axo" id="axo" role="img" aria-labelledby="axo-title axo-desc">
+            <title id="axo-title">Axonometría explotada de la residencia</title>
+            <desc id="axo-desc">Cuatro niveles separados: cimentación, planta baja, planta alta y cubierta.</desc>
+          </svg>
+          <p class="structure__annot structure__annot--tl">AXONOMETRÍA EXPLOTADA<br>ESC. 1:200 · REV. 04</p>
+          <p class="structure__annot structure__annot--br">N ↑ · 4°42′ N · 2.650 m s. n. m.</p>
+        </div>
+
+        <aside class="structure__panel">
+          <ol class="phases" aria-hidden="true">
+            <li class="phase is-active"><span>01</span>Trazado</li>
+            <li class="phase"><span>02</span>Despiece</li>
+            <li class="phase"><span>03</span>Niveles</li>
+            <li class="phase"><span>04</span>Ensamblaje</li>
+          </ol>
+
+          <div class="level-cards">
+            <article class="level-card is-active" data-card="intro">
+              <p class="level-card__code">Sistema estructural</p>
+              <h3>Hormigón, acero y vidrio.</h3>
+              <p>Pórticos de hormigón armado con luces de 9 m, un voladizo de 6 m resuelto con cercha metálica oculta y una cimentación profunda sobre 48 pilotes.</p>
+            </article>
+            <article class="level-card" data-card="0">
+              <p class="level-card__code">N-1 · −1,20 m</p>
+              <h3>Cimentación</h3>
+              <p>Losa de cimentación de 60 cm apoyada sobre 48 pilotes pre-excavados de 12 m. Impermeabilización por cristalización.</p>
+              <dl><div><dt>Pilotes</dt><dd>48 × 12 m</dd></div><div><dt>Hormigón</dt><dd>620 m³</dd></div></dl>
+            </article>
+            <article class="level-card" data-card="1">
+              <p class="level-card__code">N0 · ±0,00 m</p>
+              <h3>Planta baja</h3>
+              <p>Salón de doble altura, cocina, comedor, cine, suite de huéspedes y servicio. Muros cortina de vidrio estructural hacia la piscina.</p>
+              <dl><div><dt>Superficie</dt><dd>541 m²</dd></div><div><dt>Altura libre</dt><dd>3,80 m</dd></div></dl>
+            </article>
+            <article class="level-card" data-card="2">
+              <p class="level-card__code">N+1 · +4,20 m</p>
+              <h3>Planta alta</h3>
+              <p>Tres suites, estudio y biblioteca. El volumen vuela 6 m sobre el jardín sostenido por una cercha de acero integrada en los muros.</p>
+              <dl><div><dt>Superficie</dt><dd>404 m²</dd></div><div><dt>Voladizo</dt><dd>6,00 m</dd></div></dl>
+            </article>
+            <article class="level-card" data-card="3">
+              <p class="level-card__code">N+2 · +8,00 m</p>
+              <h3>Cubierta y rooftop</h3>
+              <p>Rooftop de 120 m² con pérgola bioclimática, 42 paneles fotovoltaicos y captación pluvial conectada a un aljibe de 40 m³.</p>
+              <dl><div><dt>Solar</dt><dd>18 kWp</dd></div><div><dt>Aljibe</dt><dd>40 m³</dd></div></dl>
+            </article>
+            <article class="level-card" data-card="all">
+              <p class="level-card__code">Ensamblaje completo</p>
+              <h3>1.240 m² construidos.</h3>
+              <p>Cuatro capas que trabajan como un solo cuerpo: diseño sismorresistente con disipadores viscosos y certificación LEED Gold en proceso.</p>
+            </article>
+          </div>
+
+          <ol class="levels" aria-hidden="true">
+            <li class="level" data-level="3"><span>N+2</span>Cubierta</li>
+            <li class="level" data-level="2"><span>N+1</span>Planta alta</li>
+            <li class="level" data-level="1"><span>N0</span>Planta baja</li>
+            <li class="level" data-level="0"><span>N-1</span>Cimentación</li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 05 · PLANOS ============ -->
+    <section class="plans" id="planos" data-section="Planos" data-index="05" aria-labelledby="plans-title">
+      <div class="container">
+        <header class="section-head section-head--row">
+          <div>
+            <p class="eyebrow">(05) — Planos arquitectónicos</p>
+            <h2 class="display" id="plans-title" data-split>Cada metro, <em>pensado</em>.</h2>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Seleccionar planta">
+            <button class="tab is-active" role="tab" aria-selected="true" data-plan="pb" type="button">Planta baja</button>
+            <button class="tab" role="tab" aria-selected="false" data-plan="pa" type="button">Planta alta</button>
+            <span class="tabs__pill" aria-hidden="true"></span>
+          </div>
+        </header>
+
+        <div class="plans__board">
+          <div class="plans__sheet">
+            <svg class="plan" id="plan" viewBox="0 0 1000 810" role="img" aria-labelledby="plan-title">
+              <title id="plan-title">Plano de planta de la residencia</title>
+            </svg>
+            <div class="plans__stamp">
+              <span>AUREA · A-101</span>
+              <span class="plans__stamp-level">Planta baja · N0</span>
+              <span>ESC. 1:100</span>
+            </div>
+          </div>
+          <aside class="plans__legend">
+            <p class="plans__legend-title">Cuadro de áreas</p>
+            <ol class="plans__rooms"></ol>
+            <p class="plans__total"><span>Total planta</span><b>—</b></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · FICHA TÉCNICA ============ -->
+    <section class="specs" id="ficha" data-section="Ficha técnica" data-index="06" aria-labelledby="specs-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">(06) — Ficha técnica</p>
+          <h2 class="display" id="specs-title" data-split>Los números de <em>AUREA</em>.</h2>
+        </header>
+
+        <ul class="stats">
+          <li class="stat"><p class="stat__num"><span data-count="1240" data-format="thousands">0</span><small>m²</small></p><p class="stat__label">Construidos</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="3500" data-format="thousands">0</span><small>m²</small></p><p class="stat__label">De terreno</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="4">0</span></p><p class="stat__label">Suites con baño</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="6">0</span></p><p class="stat__label">Baños</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="25">0</span><small>m</small></p><p class="stat__label">Piscina infinita</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="7.4" data-decimals="1">0</span><small>m</small></p><p class="stat__label">Doble altura</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="18">0</span><small>kWp</small></p><p class="stat__label">Energía solar</p></li>
+          <li class="stat"><p class="stat__num"><span data-count="48">0</span></p><p class="stat__label">Pilotes de 12 m</p></li>
+        </ul>
+
+        <div class="sheet">
+          <div class="tabs tabs--sheet" role="tablist" aria-label="Categorías de la ficha técnica">
+            <button class="tab is-active" role="tab" aria-selected="true" aria-controls="sheet-ext" id="tab-ext" type="button">Externas</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="sheet-int" id="tab-int" type="button">Internas</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="sheet-str" id="tab-str" type="button">Estructura</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="sheet-sys" id="tab-sys" type="button">Sistemas</button>
+            <span class="tabs__pill" aria-hidden="true"></span>
+          </div>
+
+          <div class="sheet__panel is-active" id="sheet-ext" role="tabpanel" aria-labelledby="tab-ext">
+            <dl class="sheet__rows">
+              <div><dt>Fachada</dt><dd>Hormigón arquitectónico visto, lamas de teca termotratada y travertino apomazado</dd></div>
+              <div><dt>Piscina</dt><dd>Borde infinito de 25 × 3,5 m, climatizada por geotermia, LED subacuático</dd></div>
+              <div><dt>Terrazas</dt><dd>280 m² en tres niveles con cocina exterior, fogata y pérgola bioclimática</dd></div>
+              <div><dt>Paisajismo</dt><dd>3.500 m² con 120 árboles nativos y riego por goteo inteligente</dd></div>
+              <div><dt>Garaje</dt><dd>Cuatro vehículos, dos cargadores EV de 22 kW y portón pivotante de 4 m</dd></div>
+              <div><dt>Seguridad</dt><dd>CCTV 4K con analítica, control biométrico y sensores perimetrales</dd></div>
+            </dl>
+          </div>
+          <div class="sheet__panel" id="sheet-int" role="tabpanel" aria-labelledby="tab-int" hidden>
+            <dl class="sheet__rows">
+              <div><dt>Salón</dt><dd>Doble altura de 7,4 m, chimenea suspendida y ventanal de 12 m sin perfil</dd></div>
+              <div><dt>Cocina</dt><dd>Isla de mármol Calacatta de 5 m, electrodomésticos integrados y despensa oculta</dd></div>
+              <div><dt>Suites</dt><dd>Cuatro suites con baño privado; la principal con vestidor de 32 m² y terraza</dd></div>
+              <div><dt>Baños</dt><dd>Piedra natural, bañera exenta, ducha de lluvia, sauna seca y suelo radiante</dd></div>
+              <div><dt>Ocio</dt><dd>Cine de 12 butacas Dolby Atmos, gimnasio y bodega de 600 botellas</dd></div>
+              <div><dt>Acabados</dt><dd>Roble europeo en espiga, nogal a medida, mármol y cal natural en muros</dd></div>
+            </dl>
+          </div>
+          <div class="sheet__panel" id="sheet-str" role="tabpanel" aria-labelledby="tab-str" hidden>
+            <dl class="sheet__rows">
+              <div><dt>Sistema</dt><dd>Pórticos de hormigón armado de 35 MPa con vigas postensadas y luces de 9 m</dd></div>
+              <div><dt>Cimentación</dt><dd>Losa de 60 cm sobre 48 pilotes pre-excavados de 12 m de profundidad</dd></div>
+              <div><dt>Voladizo</dt><dd>6 m resueltos con cercha de acero estructural oculta en los muros</dd></div>
+              <div><dt>Sismo</dt><dd>Diseño sismorresistente con disipadores viscosos en los pórticos principales</dd></div>
+              <div><dt>Cubierta</dt><dd>Losa aligerada, aislamiento térmico de 12 cm e impermeabilización EPDM</dd></div>
+              <div><dt>Carpintería</dt><dd>Aluminio con rotura de puente térmico y triple vidrio de baja emisividad</dd></div>
+            </dl>
+          </div>
+          <div class="sheet__panel" id="sheet-sys" role="tabpanel" aria-labelledby="tab-sys" hidden>
+            <dl class="sheet__rows">
+              <div><dt>Clima</dt><dd>Geotermia con suelo radiante y refrescante; ventilación con recuperación de calor</dd></div>
+              <div><dt>Energía</dt><dd>42 paneles fotovoltaicos (18 kWp) y baterías de 30 kWh</dd></div>
+              <div><dt>Agua</dt><dd>Captación pluvial en aljibe de 40 m³ y tratamiento de aguas grises</dd></div>
+              <div><dt>Domótica</dt><dd>KNX integral: iluminación escénica, clima, persianas y control por voz</dd></div>
+              <div><dt>Conectividad</dt><dd>Fibra óptica, Wi-Fi 7 en malla y cableado categoría 8</dd></div>
+              <div><dt>Certificación</dt><dd>Calificación energética A+ · LEED Gold en proceso</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · GALERÍA (zoom grid) ============ -->
+    <section class="gallery" id="galeria" data-section="Galería" data-index="07" aria-labelledby="gallery-title">
+      <div class="gallery__pin">
+        <div class="gallery__grid">
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80" data-fallback="1613490493576-7fde63acd811" alt="Residencia blanca con piscina bajo el sol" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80" data-fallback="1502672260266-1c1ef2d93688" alt="Sala de estar minimalista" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1000&q=80" data-fallback="1600596542815-ffad4c1539a9" alt="Terraza y piscina al atardecer" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" data-fallback="1552321554-5fefe8c9ef14" alt="Baño con acabados en piedra" loading="lazy" decoding="async"></figure>
+          <figure class="g-item g-item--center media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=80" data-fallback="1600596542815-ffad4c1539a9,1512917774080-9991f1c4c750" alt="Vista principal de la residencia con piscina" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=80" data-fallback="1556911220-bff31c812dba" alt="Cocina abierta con isla" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1000&q=80" data-fallback="1600585154340-be6161a56a0c" alt="Fachada iluminada de noche" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80" data-fallback="1505693416388-ac5ce068fe85" alt="Dormitorio sereno con textiles naturales" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=80" data-fallback="1605276374104-dee2a0ed3cd6" alt="Volumen exterior entre jardines" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="gallery__caption">
+          <p class="eyebrow eyebrow--light">(07) — Galería</p>
+          <h2 class="display" id="gallery-title">Cada ángulo,<br>una <em>obra</em>.</h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__row"><span>Residencia de autor — Arquitectura en estado puro — AUREA — </span><span>Residencia de autor — Arquitectura en estado puro — AUREA — </span></div>
+      <div class="marquee__row marquee__row--rev"><span>Hormigón · Madera · Vidrio · Luz · Silencio · </span><span>Hormigón · Madera · Vidrio · Luz · Silencio · </span></div>
+    </div>
+
+    <!-- ============ 08 · CONTACTO ============ -->
+    <section class="contact" id="contacto" data-section="Contacto" data-index="08" aria-labelledby="contact-title">
+      <div class="contact__bg media" data-speed="0.15">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=2000&q=80"
+             data-fallback="1600596542815-ffad4c1539a9,1613490493576-7fde63acd811"
+             alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="container contact__inner">
+        <div class="contact__copy">
+          <p class="eyebrow eyebrow--light">(08) — Visita privada</p>
+          <h2 class="display" id="contact-title" data-split>Una sola residencia.<br><em>Un solo propietario.</em></h2>
+          <p class="lead">Recorridos privados con el arquitecto, bajo cita previa. Precio bajo consulta.</p>
+          <dl class="contact__meta">
+            <div><dt>Ubicación</dt><dd>Reserva Valle Alto</dd></div>
+            <div><dt>Entrega</dt><dd>Segundo trimestre 2027</dd></div>
+            <div><dt>Estado</dt><dd>En construcción · 68 %</dd></div>
+          </dl>
+        </div>
+        <form class="contact__form" novalidate>
+          <div class="field">
+            <input id="f-name" name="nombre" type="text" autocomplete="name" placeholder=" " required>
+            <label for="f-name">Nombre completo</label>
+          </div>
+          <div class="field">
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder=" " required>
+            <label for="f-email">Correo electrónico</label>
+          </div>
+          <div class="field">
+            <input id="f-phone" name="telefono" type="tel" autocomplete="tel" placeholder=" ">
+            <label for="f-phone">Teléfono</label>
+          </div>
+          <div class="field">
+            <input id="f-date" name="fecha" type="date" placeholder=" ">
+            <label for="f-date" class="is-fixed">Fecha preferida</label>
+          </div>
+          <div class="field field--full">
+            <textarea id="f-msg" name="mensaje" rows="3" placeholder=" "></textarea>
+            <label for="f-msg">Mensaje (opcional)</label>
+          </div>
+          <button class="btn btn--solid" type="submit" data-magnetic><span>Solicitar visita privada</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-section="Contacto" data-index="08" data-nav="contacto">
+    <div class="container footer__top">
+      <p class="footer__claim">Arquitectura que <em>permanece</em>.</p>
+      <nav class="footer__links" aria-label="Enlaces del pie">
+        <a href="#exterior" data-link>Exterior</a>
+        <a href="#interior" data-link>Interior</a>
+        <a href="#estructura" data-link>Estructura</a>
+        <a href="#planos" data-link>Planos</a>
+        <a href="#ficha" data-link>Ficha técnica</a>
+        <a href="#contacto" data-link>Contacto</a>
+      </nav>
+    </div>
+    <p class="footer__giant" aria-hidden="true"><span>A</span><span>U</span><span>R</span><span>E</span><span>A</span></p>
+    <div class="container footer__bottom">
+      <p>© 2026 AUREA · Proyecto conceptual.</p>
+      <p>Fotografías: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+      <a href="#inicio" class="footer__top-link" data-link>Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
