@@ -9,8 +9,9 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="SP FUMIGACION — Control de plagas y limpieza">
   <meta property="og:description" content="Fumigación, desinfección y limpieza profesional con garantía por escrito.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:image" content="https://images.pexels.com/photos/4176412/pexels-photo-4176412.jpeg?auto=compress&cs=tinysrgb&w=1200">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23080b0a'/%3E%3Cpath d='M16 4 L26 8 V15 C26 21.5 21.5 26 16 28 C10.5 26 6 21.5 6 15 V8 Z' fill='none' stroke='%234fd18b' stroke-width='2'/%3E%3Cpath d='M11.5 16 L15 19.5 L21 12.5' fill='none' stroke='%234fd18b' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://images.pexels.com">
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,7 +21,11 @@
        prueba la siguiente de data-fallback; si ninguna carga, deja el degradado. */
     document.documentElement.classList.add('js');
     (function () {
+      /* Cada respaldo puede ser un ID de Pexels (solo números) o de Unsplash. */
       function build(id, w) {
+        if (/^\d+$/.test(id)) {
+          return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + w;
+        }
         return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + w + '&q=80';
       }
       document.addEventListener('error', function (e) {
@@ -109,9 +114,9 @@
     <section class="hero" id="inicio" data-section="Inicio" data-index="01">
       <div class="hero__pin">
         <div class="hero__media media">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80"
-               data-fallback="1613490493576-7fde63acd811,1512917774080-9991f1c4c750"
-               alt="Vivienda protegida por SP FUMIGACION al atardecer"
+          <img src="https://images.pexels.com/photos/4176921/pexels-photo-4176921.jpeg?auto=compress&cs=tinysrgb&w=2000"
+               data-fallback="4176539,4176412,1600596542815-ffad4c1539a9"
+               alt="Técnico de SP FUMIGACION con traje de protección en una habitación nebulizada"
                fetchpriority="high" decoding="async" data-critical>
         </div>
         <div class="hero__shade"></div>
@@ -157,14 +162,14 @@
     <!-- ============ MANIFIESTO ============ -->
     <section class="manifesto" aria-labelledby="manifesto-title">
       <div class="manifesto__float manifesto__float--a media" data-speed="-0.25">
-        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=80"
-             data-fallback="1600566753190-17f0baa2a6c3,1502672260266-1c1ef2d93688"
-             alt="Cocina limpia y libre de plagas" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/6195125/pexels-photo-6195125.jpeg?auto=compress&cs=tinysrgb&w=900"
+             data-fallback="6196677,6195121,1556911220-bff31c812dba"
+             alt="Equipo de limpieza profesional con uniforme y equipos" loading="lazy" decoding="async">
       </div>
       <div class="manifesto__float manifesto__float--b media" data-speed="0.2">
-        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=80"
-             data-fallback="1502672260266-1c1ef2d93688,1522708323590-d24dbb6b0267"
-             alt="Sala de estar desinfectada y ordenada" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/4176412/pexels-photo-4176412.jpeg?auto=compress&cs=tinysrgb&w=900"
+             data-fallback="4099260,4176416,1618221195710-dd6b41faaea6"
+             alt="Técnica con traje de protección fumigando un interior" loading="lazy" decoding="async">
       </div>
       <div class="container">
         <p class="eyebrow" id="manifesto-title">Nuestro compromiso</p>
@@ -193,9 +198,9 @@
 
           <article class="hs-panel">
             <figure class="hs-panel__media media" data-cursor="Ver">
-              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80"
-                   data-fallback="1556911220-bff31c812dba,1556912173-3bb406ef7e77"
-                   alt="Cocina tratada contra cucarachas" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/4166388/pexels-photo-4166388.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                   data-fallback="19357266,11032990,1600566753190-17f0baa2a6c3"
+                   alt="Cucaracha en primer plano" loading="lazy" decoding="async">
             </figure>
             <div class="hs-panel__body">
               <span class="hs-panel__num">F.01</span>
@@ -210,9 +215,9 @@
 
           <article class="hs-panel hs-panel--tall">
             <figure class="hs-panel__media media" data-cursor="Ver">
-              <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1400&q=80"
-                   data-fallback="1580587771525-78b9dba3b914,1564013799919-ab600027ffc6"
-                   alt="Perímetro exterior protegido contra roedores" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/95399/pexels-photo-95399.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                   data-fallback="206627,7315841,1605276374104-dee2a0ed3cd6"
+                   alt="Rata escondida, plaga de roedores" loading="lazy" decoding="async">
             </figure>
             <div class="hs-panel__body">
               <span class="hs-panel__num">F.02</span>
@@ -227,9 +232,9 @@
 
           <article class="hs-panel">
             <figure class="hs-panel__media media" data-cursor="Ver">
-              <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1400&q=80"
-                   data-fallback="1600210492486-724fe5c67fb0,1522708323590-d24dbb6b0267"
-                   alt="Muebles y estructuras de madera protegidos contra termitas" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/12895278/pexels-photo-12895278.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                   data-fallback="4176370,18021337,1507842217343-583bb7270b66"
+                   alt="Termita sobre madera en primer plano" loading="lazy" decoding="async">
             </figure>
             <div class="hs-panel__body">
               <span class="hs-panel__num">F.03</span>
@@ -244,9 +249,9 @@
 
           <article class="hs-panel hs-panel--tall">
             <figure class="hs-panel__media media" data-cursor="Ver">
-              <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80"
-                   data-fallback="1522771739844-6a9f6d5f14af,1616594039964-ae9021a400a0"
-                   alt="Dormitorio tratado contra chinches de cama" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/7598137/pexels-photo-7598137.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                   data-fallback="5499416,1505693416388-ac5ce068fe85"
+                   alt="Dormitorio con cama y colchón tratados contra chinches" loading="lazy" decoding="async">
             </figure>
             <div class="hs-panel__body">
               <span class="hs-panel__num">F.04</span>
@@ -261,9 +266,9 @@
 
           <article class="hs-panel">
             <figure class="hs-panel__media media" data-cursor="Ver">
-              <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80"
-                   data-fallback="1600047509807-ba8f99d2cdde,1512917774080-9991f1c4c750"
-                   alt="Jardín y piscina tratados contra mosquitos" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/12719589/pexels-photo-12719589.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                   data-fallback="86722,12972049,1613977257363-707ba9348227"
+                   alt="Mosquito en primer plano" loading="lazy" decoding="async">
             </figure>
             <div class="hs-panel__body">
               <span class="hs-panel__num">F.05</span>
@@ -278,9 +283,9 @@
 
           <article class="hs-panel hs-panel--tall">
             <figure class="hs-panel__media media" data-cursor="Ver">
-              <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1400&q=80"
-                   data-fallback="1564013799919-ab600027ffc6,1580587771525-78b9dba3b914"
-                   alt="Jardín protegido contra hormigas, arañas y alacranes" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/1104974/pexels-photo-1104974.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                   data-fallback="842401,3521290,1600047509807-ba8f99d2cdde"
+                   alt="Hormiga sobre una hoja en primer plano" loading="lazy" decoding="async">
             </figure>
             <div class="hs-panel__body">
               <span class="hs-panel__num">F.06</span>
@@ -310,14 +315,14 @@
     <section class="threshold" aria-label="Transición de la fumigación a la limpieza" data-section="Limpieza" data-index="03" data-nav="limpieza">
       <div class="threshold__pin">
         <div class="threshold__outer media">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=80"
-               data-fallback="1613490493576-7fde63acd811,1600585154340-be6161a56a0c"
-               alt="Exterior de una vivienda tratada" loading="lazy" decoding="async">
+          <img src="https://images.pexels.com/photos/4176539/pexels-photo-4176539.jpeg?auto=compress&cs=tinysrgb&w=2000"
+               data-fallback="4176412,4099468,1512917774080-9991f1c4c750"
+               alt="Técnico nebulizando con traje de protección" loading="lazy" decoding="async">
         </div>
         <div class="threshold__inner media">
-          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80"
-               data-fallback="1600607687939-ce8a6c25118c,1502672260266-1c1ef2d93688"
-               alt="Interior limpio y desinfectado" loading="lazy" decoding="async">
+          <img src="https://images.pexels.com/photos/6195198/pexels-photo-6195198.jpeg?auto=compress&cs=tinysrgb&w=2000"
+               data-fallback="9462746,4008501,1600210492486-724fe5c67fb0"
+               alt="Mujer realizando limpieza en una casa" loading="lazy" decoding="async">
         </div>
         <div class="threshold__copy threshold__copy--in">
           <p class="eyebrow eyebrow--light">Después del tratamiento</p>
@@ -343,34 +348,34 @@
         <div class="interior__visual">
           <div class="interior__frame">
             <figure class="interior__img media is-first">
-              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80"
-                   data-fallback="1618221195710-dd6b41faaea6,1502672260266-1c1ef2d93688"
-                   alt="Hogar después de una limpieza profunda" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/9462746/pexels-photo-9462746.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                   data-fallback="6195198,4008501,1600607687939-ce8a6c25118c"
+                   alt="Limpieza profunda de una cocina" loading="lazy" decoding="async">
             </figure>
             <figure class="interior__img media">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
-                   data-fallback="1522708323590-d24dbb6b0267,1502672260266-1c1ef2d93688"
-                   alt="Oficina limpia y ordenada" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/10567271/pexels-photo-10567271.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                   data-fallback="6197106,9462149,1497366216548-37526070297c"
+                   alt="Limpieza de un escritorio de oficina" loading="lazy" decoding="async">
             </figure>
             <figure class="interior__img media">
-              <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1600&q=80"
-                   data-fallback="1584622650111-993a426fbf0a,1620626011761-996317b8d101"
-                   alt="Baño desinfectado y sanitizado" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/4099468/pexels-photo-4099468.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                   data-fallback="4021256,4176416,1552321554-5fefe8c9ef14"
+                   alt="Desinfección de superficies con traje de protección" loading="lazy" decoding="async">
             </figure>
             <figure class="interior__img media">
-              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80"
-                   data-fallback="1600596542815-ffad4c1539a9,1512917774080-9991f1c4c750"
-                   alt="Agua limpia tras el lavado de tanques y piscinas" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/5326898/pexels-photo-5326898.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                   data-fallback="8028674,14053649,1613490493576-7fde63acd811"
+                   alt="Piscina con agua limpia y cristalina" loading="lazy" decoding="async">
             </figure>
             <figure class="interior__img media">
-              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=80"
-                   data-fallback="1618221195710-dd6b41faaea6,1522708323590-d24dbb6b0267"
-                   alt="Sofás y alfombras lavados" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/4401538/pexels-photo-4401538.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                   data-fallback="38325,1616486338812-3dadae4b4ace"
+                   alt="Aspirado profundo de un sillón tapizado" loading="lazy" decoding="async">
             </figure>
             <figure class="interior__img media">
-              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80"
-                   data-fallback="1504307651254-35680f356dfd,1600585154340-be6161a56a0c"
-                   alt="Obra terminada lista para la limpieza final" loading="lazy" decoding="async">
+              <img src="https://images.pexels.com/photos/3616746/pexels-photo-3616746.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                   data-fallback="3990359,9462149,1541888946425-d81bb19240f5"
+                   alt="Aspiradora y herramientas en una obra recién terminada" loading="lazy" decoding="async">
             </figure>
             <div class="interior__counter"><span class="interior__current">01</span> / 06</div>
           </div>
@@ -638,15 +643,15 @@
     <section class="gallery" id="galeria" data-section="Galería" data-index="07" aria-labelledby="galeria-title">
       <div class="gallery__pin">
         <div class="gallery__grid">
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80" data-fallback="1613490493576-7fde63acd811" alt="Vivienda con perímetro protegido" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80" data-fallback="1502672260266-1c1ef2d93688" alt="Sala limpia tras el servicio" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1000&q=80" data-fallback="1600596542815-ffad4c1539a9" alt="Terraza libre de mosquitos" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" data-fallback="1552321554-5fefe8c9ef14" alt="Baño desinfectado" loading="lazy" decoding="async"></figure>
-          <figure class="g-item g-item--center media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=80" data-fallback="1600596542815-ffad4c1539a9,1512917774080-9991f1c4c750" alt="Vivienda protegida por SP FUMIGACION" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=80" data-fallback="1556911220-bff31c812dba" alt="Cocina libre de cucarachas" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1000&q=80" data-fallback="1600585154340-be6161a56a0c" alt="Exterior tratado contra roedores" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80" data-fallback="1505693416388-ac5ce068fe85" alt="Dormitorio libre de chinches" loading="lazy" decoding="async"></figure>
-          <figure class="g-item media" data-cursor="Ver"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=80" data-fallback="1605276374104-dee2a0ed3cd6" alt="Jardín tratado contra hormigas" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/4176416/pexels-photo-4176416.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="4176412,1512917774080-9991f1c4c750" alt="Desinfección de un ambiente con nebulizador" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/6196677/pexels-photo-6196677.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="6195121,1618221195710-dd6b41faaea6" alt="Equipo de limpieza caminando con sus equipos" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/4166388/pexels-photo-4166388.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="11032990,1613977257363-707ba9348227" alt="Cucaracha, una de las plagas que controlamos" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/18885426/pexels-photo-18885426.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="713297,1584622650111-993a426fbf0a" alt="Limpieza profesional de ventanas" loading="lazy" decoding="async"></figure>
+          <figure class="g-item g-item--center media" data-cursor="Ver"><img src="https://images.pexels.com/photos/6195125/pexels-photo-6195125.jpeg?auto=compress&cs=tinysrgb&w=2000" data-fallback="6195121,6196677,1613490493576-7fde63acd811" alt="Equipo de limpieza de SP FUMIGACION listo para el servicio" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/4021256/pexels-photo-4021256.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="4440533,1600566753190-17f0baa2a6c3" alt="Desinfección de superficies con guantes y atomizador" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/4176370/pexels-photo-4176370.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="4176412,1580587771525-78b9dba3b914" alt="Fumigación de un mueble de madera contra termitas" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/713297/pexels-photo-713297.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="18885426,1522771739844-6a9f6d5f14af" alt="Limpieza de vidrios en una sala" loading="lazy" decoding="async"></figure>
+          <figure class="g-item media" data-cursor="Ver"><img src="https://images.pexels.com/photos/4099260/pexels-photo-4099260.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="4099468,1564013799919-ab600027ffc6" alt="Desinfección dentro de una vivienda" loading="lazy" decoding="async"></figure>
         </div>
         <div class="gallery__caption">
           <p class="eyebrow eyebrow--light">(07) — Galería</p>
@@ -663,8 +668,8 @@
     <!-- ============ 08 · CONTACTO ============ -->
     <section class="contact" id="contacto" data-section="Contacto" data-index="08" aria-labelledby="contacto-title">
       <div class="contact__bg media" data-speed="0.15">
-        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=2000&q=80"
-             data-fallback="1600596542815-ffad4c1539a9,1613490493576-7fde63acd811"
+        <img src="https://images.pexels.com/photos/4176412/pexels-photo-4176412.jpeg?auto=compress&cs=tinysrgb&w=2000"
+             data-fallback="4099468,4176539,1580587771525-78b9dba3b914"
              alt="" loading="lazy" decoding="async">
       </div>
       <div class="container contact__inner">
@@ -734,7 +739,7 @@
     <p class="footer__giant" aria-hidden="true"><span>S</span><span>P</span><span>&nbsp;</span><span>F</span><span>U</span><span>M</span><span>I</span><span>G</span><span>A</span><span>C</span><span>I</span><span>O</span><span>N</span></p>
     <div class="container footer__bottom">
       <p>© 2026 SP FUMIGACION · Control de plagas y limpieza profesional.</p>
-      <p>Fotografías: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+      <p>Fotografías: <a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a> · <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
       <a href="#inicio" class="footer__top-link" data-link>Volver arriba ↑</a>
     </div>
   </footer>

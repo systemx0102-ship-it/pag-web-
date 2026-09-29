@@ -25,7 +25,7 @@ Página web inmersiva para SP FUMIGACION: fumigación y control de plagas, desin
 - HTML, CSS y JavaScript sin paso de compilación.
 - [GSAP](https://gsap.com) 3.15 + ScrollTrigger + SplitText y [Lenis](https://github.com/darkroomengineering/lenis) 1.3, **incluidos en `assets/vendor/`** (no dependen de un CDN).
 - Tipografías auto-alojadas: Cormorant Garamond, Manrope y JetBrains Mono (SIL OFL).
-- Fotografías reales de [Unsplash](https://unsplash.com), cargadas desde `images.unsplash.com`.
+- Fotografías reales de fumigación, plagas y limpieza de [Pexels](https://www.pexels.com) (`images.pexels.com`), con fotos de [Unsplash](https://unsplash.com) como último respaldo.
 
 ```
 index.html
@@ -61,11 +61,11 @@ python3 scripts/build_standalone.py
 
 ## Cambiar las fotos
 
-Cada `<img>` apunta a una foto de Unsplash y declara respaldos en `data-fallback` (IDs separados por comas). Si una foto no carga, la página prueba la siguiente automáticamente; si ninguna carga, queda un degradado cálido con textura, sin romper el diseño.
+Cada `<img>` apunta a una foto de Pexels y declara respaldos en `data-fallback`, separados por comas. Un ID solo con números es de Pexels (el número final de la dirección de la foto, por ejemplo `pexels.com/photo/…-4176412/`) y un ID con guion es de Unsplash. Si una foto no carga, la página prueba la siguiente automáticamente; si ninguna carga, queda un degradado con textura, sin romper el diseño.
 
 ```html
-<img src="https://images.unsplash.com/photo-XXXXXXXX-XXXXXXXX?auto=format&fit=crop&w=1400&q=80"
-     data-fallback="ID_ALTERNATIVO_1,ID_ALTERNATIVO_2" alt="…">
+<img src="https://images.pexels.com/photos/4176412/pexels-photo-4176412.jpeg?auto=compress&cs=tinysrgb&w=1400"
+     data-fallback="4099260,1600596542815-ffad4c1539a9" alt="…">
 ```
 
 Para usar fotos propias, basta con reemplazar el `src` por la ruta local (por ejemplo `assets/img/fachada.jpg`) y quitar `data-fallback`.
@@ -82,5 +82,5 @@ Para usar fotos propias, basta con reemplazar el `src` por la ruta local (por ej
 - GSAP: [licencia estándar de GreenSock](https://gsap.com/standard-license) (uso gratuito).
 - Lenis: MIT (`assets/vendor/LICENSE-lenis.txt`).
 - Tipografías: SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
-- Fotografías: licencia de Unsplash.
-- Las fotos son de Unsplash (espacios de ejemplo); lo ideal es reemplazarlas por fotos reales de los trabajos de SP FUMIGACION.
+- Fotografías: licencias de Pexels y Unsplash (uso gratuito).
+- Las fotos son de bancos de imágenes; lo ideal es ir sumando fotos reales de los trabajos de SP FUMIGACION.
