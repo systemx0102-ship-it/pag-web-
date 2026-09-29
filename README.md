@@ -45,6 +45,16 @@ python3 -m http.server 8080
 # abrir http://localhost:8080
 ```
 
+## Versión de un solo archivo
+
+`dist/index.html` contiene toda la página en un único archivo (estilos, tipografías, librerías y scripts incrustados). Se abre con doble clic, sin servidor; solo las fotos se cargan desde internet.
+
+Después de modificar `index.html` o cualquier archivo de `assets/`, regenérala con:
+
+```bash
+python3 scripts/build_standalone.py
+```
+
 ## Publicar con GitHub Pages
 
 *Settings → Pages → Deploy from a branch*, elegir la rama y la carpeta `/ (root)`. El archivo `.nojekyll` ya está incluido.
