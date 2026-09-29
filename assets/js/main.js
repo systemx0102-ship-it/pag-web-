@@ -35,7 +35,7 @@
      ------------------------------------------------------------------------ */
   let lenis = null;
   if (!reduceMotion && window.Lenis) {
-    lenis = new Lenis({ lerp: 0.05, wheelMultiplier: 0.65, touchMultiplier: 0.8, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.75, touchMultiplier: 1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -214,15 +214,15 @@
         start: 'top top',
         end: '+=260%',
         pin: '.hero__pin',
-        scrub: 2,
+        scrub: 1,
         invalidateOnRefresh: true,
       },
     });
     tl.to('.hero__ui', { opacity: 0, y: -50, duration: 0.25, ease: 'power1.in' }, 0)
       .fromTo('.hero__mask',
         { scale: 1, transformOrigin: heroOrigin },
-        { scale: () => (isMobile() ? 42 : 36), transformOrigin: heroOrigin, duration: 1, ease: 'power3.in', force3D: false }, 0)
-      .to('.hero__mask', { opacity: 0, duration: 0.2 }, 0.8)
+        { scale: () => (isMobile() ? 30 : 26), transformOrigin: heroOrigin, duration: 1, ease: 'power3.in', force3D: true }, 0)
+      .to('.hero__mask', { opacity: 0, duration: 0.25 }, 0.7)
       .fromTo('.hero__media', { scale: 1.25 }, { scale: 1, duration: 1.1, ease: 'power2.out' }, 0)
       .to('.hero__shade', { opacity: 1, duration: 0.35 }, 0.85)
       .fromTo('.hero__reveal > *', { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, stagger: 0.07, ease: 'power2.out' }, 0.95)
@@ -269,7 +269,7 @@
         start: 'top top',
         end: () => '+=' + distance() * 1.6,
         pin: '.exterior__pin',
-        scrub: 2,
+        scrub: 1,
         invalidateOnRefresh: true,
         anticipatePin: 1,
       },
@@ -328,7 +328,7 @@
         start: 'top top',
         end: '+=280%',
         pin: '.threshold__pin',
-        scrub: 2,
+        scrub: 1,
         invalidateOnRefresh: true,
       },
     })
@@ -573,7 +573,7 @@
         start: 'top top',
         end: () => '+=' + window.innerHeight * (isMobile() ? 6 : 7.5),
         pin: '.structure__pin',
-        scrub: 2,
+        scrub: 1,
         invalidateOnRefresh: true,
       },
       onUpdate: sync,
@@ -893,7 +893,7 @@
       gsap.set(openings, { opacity: 0 });
       drawTween = gsap.timeline(fromScroll ? {
         defaults: { ease: 'none' },
-        scrollTrigger: { trigger: '.plans__sheet', start: 'top 82%', end: 'center 48%', scrub: 2 },
+        scrollTrigger: { trigger: '.plans__sheet', start: 'top 82%', end: 'center 48%', scrub: 1 },
       } : { defaults: { ease: 'power2.inOut' } });
       drawTween
         .to(openings, { opacity: 1, duration: 0.01 }, 0.15)
@@ -1024,7 +1024,7 @@
         start: 'top top',
         end: '+=280%',
         pin: '.gallery__pin',
-        scrub: 2,
+        scrub: 1,
         invalidateOnRefresh: true,
       },
     })
