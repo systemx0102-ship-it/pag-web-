@@ -331,6 +331,272 @@
   /* ------------------------------------------------------------------------
      MANIFIESTO — cada palabra se enciende al ritmo del scroll
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     NEUTRALIZACIÓN — una plaga hecha de partículas es detectada, fumigada,
+     se disuelve en niebla y renace como el escudo de SP
+     ------------------------------------------------------------------------ */
+  function sampleShape(draw, count) {
+    const S = 420;
+    const c = document.createElement('canvas');
+    c.width = c.height = S;
+    const g = c.getContext('2d');
+    draw(g, S);
+    const data = g.getImageData(0, 0, S, S).data;
+    const pts = [];
+    for (let y = 0; y < S; y += 3) {
+      for (let x = 0; x < S; x += 3) {
+        if (data[(y * S + x) * 4 + 3] > 128) pts.push([x / S - 0.5, y / S - 0.5]);
+      }
+    }
+    for (let i = pts.length - 1; i > 0; i -= 1) {
+      const k = Math.floor(Math.random() * (i + 1));
+      [pts[i], pts[k]] = [pts[k], pts[i]];
+    }
+    return Array.from({ length: count }, (_, i) => pts[i % pts.length]);
+  }
+
+  function drawRoach(g, S) {
+    const k = S / 420;
+    g.save();
+    g.scale(k, k);
+    g.fillStyle = g.strokeStyle = '#fff';
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    const ell = (x, y, rx, ry, rot = 0) => { g.beginPath(); g.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); g.fill(); };
+    ell(210, 250, 62, 112);          // abdomen y alas
+    ell(210, 132, 56, 36);           // pronoto
+    ell(210, 98, 26, 20);            // cabeza
+    g.lineWidth = 7;
+    [[1, 1], [-1, 1]].forEach(([sx]) => {
+      const leg = (pts) => { g.beginPath(); pts.forEach(([x, y], i) => (i ? g.lineTo(210 + sx * x, y) : g.moveTo(210 + sx * x, y))); g.stroke(); };
+      leg([[40, 150], [96, 118], [128, 70]]);
+      leg([[52, 210], [118, 200], [158, 168]]);
+      leg([[50, 270], [112, 318], [150, 376]]);
+      g.lineWidth = 4;
+      g.beginPath(); g.moveTo(210 + sx * 12, 84); g.quadraticCurveTo(210 + sx * 60, 20, 210 + sx * 150, 12); g.stroke();
+      g.beginPath(); g.moveTo(210 + sx * 20, 350); g.lineTo(210 + sx * 44, 398); g.stroke();
+      g.lineWidth = 7;
+    });
+    g.globalCompositeOperation = 'destination-out';
+    g.lineWidth = 3;
+    g.beginPath(); g.moveTo(210, 160); g.lineTo(210, 356); g.stroke();
+    g.restore();
+  }
+
+  function drawShield(g, S) {
+    const k = S / 72;
+    g.save();
+    g.translate(S * 0.06, 0);
+    g.scale(k * 0.88, k * 0.88);
+    g.translate(4, 2);
+    g.fillStyle = '#fff';
+    g.fill(new Path2D('M32 3 L59 13 V33 C59 51 47 63 32 69 C17 63 5 51 5 33 V13 Z'));
+    g.globalCompositeOperation = 'destination-out';
+    g.lineWidth = 8.5;
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    g.stroke(new Path2D('M20 36 L29 45 L45 26'));
+    g.restore();
+  }
+
+  function initNeutral() {
+    const section = $('.neutral');
+    const canvas = $('.neutral__canvas');
+    if (!section || !canvas) return;
+    const ctx = canvas.getContext('2d');
+    const words = $$('.neutral__word');
+    const steps = $$('.neutral__steps li');
+    const pctEl = $('.neutral__pct');
+    const barEl = $('.neutral__bar');
+    const barFill = $('.neutral__bar i');
+    const statusEl = $('.neutral__status');
+
+    const N = isMobile() ? 1400 : 3000;
+    const roach = sampleShape(drawRoach, N);
+    const shield = sampleShape(drawShield, N);
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const parts = roach.map((a, i) => {
+      const ang = Math.random() * Math.PI * 2;
+      const ang2 = Math.random() * Math.PI * 2;
+      return {
+        a, b: shield[i],
+        s: [Math.cos(ang) * rnd(0.35, 1.05), Math.sin(ang) * rnd(0.3, 0.8)],
+        m: [Math.cos(ang2) * rnd(0.3, 1.1), Math.sin(ang2) * rnd(0.2, 0.8) - 0.15],
+        ph: Math.random() * Math.PI * 2,
+        z: rnd(0.6, 1.4),
+      };
+    });
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    let W = 0;
+    let H = 0;
+    const resize = () => {
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const pointer = { x: -1e4, y: -1e4 };
+    section.addEventListener('pointermove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      pointer.x = e.clientX - r.left;
+      pointer.y = e.clientY - r.top;
+    }, { passive: true });
+    section.addEventListener('pointerleave', () => { pointer.x = pointer.y = -1e4; });
+
+    const clamp01 = (v) => Math.min(1, Math.max(0, v));
+    const ease = (v) => (v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2);
+    const seg = (p, a, b) => ease(clamp01((p - a) / (b - a)));
+    const mix = (a, b, t) => a + (b - a) * t;
+    const PEST = [240, 179, 106];
+    const CLEAN = [110, 226, 162];
+
+    const state = { p: 0 };
+    let last = { word: -1, step: -1, status: '', pct: -1 };
+
+    function hud(p) {
+      const word = p < 0.36 ? 0 : p < 0.66 ? 1 : 2;
+      if (word !== last.word) {
+        words.forEach((w, i) => w.classList.toggle('is-active', i === word));
+        steps.forEach((s, i) => s.classList.toggle('is-active', i <= word));
+        last.word = word;
+      }
+      const pct = Math.round(100 * (1 - seg(p, 0.34, 0.8)));
+      if (pct !== last.pct) {
+        pctEl.textContent = `${pct} %`;
+        barFill.style.transform = `scaleX(${Math.max(pct, 0.5) / 100})`;
+        const clean = pct === 0;
+        pctEl.classList.toggle('is-clean', clean);
+        barEl.classList.toggle('is-clean', clean);
+        last.pct = pct;
+      }
+      const status = p < 0.2 ? 'Escaneando…' : p < 0.36 ? 'Plaga detectada' : p < 0.66 ? 'Nebulización en curso' : p < 0.84 ? 'Sellando accesos' : 'Espacio protegido';
+      if (status !== last.status) { statusEl.textContent = status; last.status = status; }
+    }
+
+    function render(time) {
+      const p = state.p;
+      const t = time || 0;
+      ctx.clearRect(0, 0, W, H);
+      const mobile = W < 760;
+      const cx = mobile ? W * 0.5 : W * 0.64;
+      const cy = mobile ? H * 0.5 : H * 0.5;
+      const size = Math.min(W * (mobile ? 0.92 : 0.5), H * (mobile ? 0.52 : 0.78));
+
+      const gather = seg(p, 0.0, 0.2);        // la niebla forma la plaga
+      const blast = seg(p, 0.36, 0.6);        // fumigación: se disuelve
+      const reform = seg(p, 0.64, 0.86);      // renace como escudo
+      const tint = seg(p, 0.4, 0.7);
+      const r = Math.round(mix(PEST[0], CLEAN[0], tint));
+      const gC = Math.round(mix(PEST[1], CLEAN[1], tint));
+      const b = Math.round(mix(PEST[2], CLEAN[2], tint));
+
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.fillStyle = `rgb(${r},${gC},${b})`;
+      const jitter = (1 - gather) * 0.02 + blast * (1 - reform) * 0.03 + 0.0025;
+      const breathe = reform * (0.004 + 0.003 * Math.sin(t * 2));
+
+      for (let i = 0; i < parts.length; i += 1) {
+        const q = parts[i];
+        const wob = Math.sin(t * 1.6 + q.ph);
+        let x = mix(q.s[0], q.a[0], gather);
+        let y = mix(q.s[1], q.a[1], gather);
+        x = mix(x, q.m[0] + wob * 0.04, blast);
+        y = mix(y, q.m[1] - blast * 0.12 * q.z, blast);
+        x = mix(x, q.b[0], reform) + Math.cos(t + q.ph) * (jitter + breathe);
+        y = mix(y, q.b[1], reform) + Math.sin(t * 1.3 + q.ph) * (jitter + breathe);
+
+        let px = cx + x * size;
+        let py = cy + y * size;
+        const dx = px - pointer.x;
+        const dy = py - pointer.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 9000) {
+          const f = (1 - d2 / 9000) * 26;
+          const d = Math.sqrt(d2) || 1;
+          px += (dx / d) * f;
+          py += (dy / d) * f;
+        }
+        const sz = q.z * (mobile ? 1.7 : 2.1);
+        ctx.globalAlpha = Math.min(1, 0.45 + 0.5 * q.z * (0.6 + 0.4 * gather) * (1 - 0.35 * blast * (1 - reform)));
+        ctx.fillRect(px, py, sz, sz);
+      }
+
+      // Barrido de escaneo sobre la plaga
+      const scan = seg(p, 0.12, 0.34);
+      if (scan > 0 && scan < 1) {
+        const yScan = cy - size * 0.55 + scan * size * 1.1;
+        const grd = ctx.createLinearGradient(0, yScan - 40, 0, yScan);
+        grd.addColorStop(0, 'rgba(240,179,106,0)');
+        grd.addColorStop(1, 'rgba(240,179,106,0.35)');
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = grd;
+        ctx.fillRect(cx - size * 0.6, yScan - 40, size * 1.2, 40);
+        ctx.fillStyle = 'rgba(255,220,170,0.9)';
+        ctx.fillRect(cx - size * 0.6, yScan, size * 1.2, 1);
+      }
+      // Halo del escudo terminado
+      if (reform > 0.6) {
+        const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, size * 0.75);
+        halo.addColorStop(0, `rgba(110,226,162,${0.12 * (reform - 0.6) / 0.4})`);
+        halo.addColorStop(1, 'rgba(110,226,162,0)');
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = halo;
+        ctx.fillRect(cx - size, cy - size, size * 2, size * 2);
+      }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+      hud(p);
+    }
+
+    if (reduceMotion) {
+      state.p = 1;
+      render(0);
+      window.addEventListener('resize', () => render(0));
+      return;
+    }
+
+    gsap.to(state, {
+      p: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => '+=' + window.innerHeight * (isMobile() ? 3.2 : 3.8),
+        pin: '.neutral__pin',
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    let running = false;
+    const tick = (time) => render(time);
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top bottom',
+      end: 'bottom top',
+      onToggle: (self) => {
+        if (self.isActive && !running) { gsap.ticker.add(tick); running = true; }
+        if (!self.isActive && running) { gsap.ticker.remove(tick); running = false; }
+      },
+    });
+    render(0);
+  }
+
+  /* ------------------------------------------------------------------------
+     Microdetalle: texto de navegación que rueda al pasar el mouse
+     ------------------------------------------------------------------------ */
+  function initRollLinks() {
+    $$('.site-nav a, .footer__links a').forEach((a) => {
+      const text = a.textContent.trim();
+      a.innerHTML = `<span class="roll"><span data-text="${text}">${text}</span></span>`;
+    });
+  }
+
   function initManifesto() {
     const text = $('.manifesto__text');
     if (!text || reduceMotion || !window.SplitText) return;
@@ -1337,9 +1603,11 @@
      ------------------------------------------------------------------------ */
   // Los disparadores se crean en el orden del documento para que cada
   // sección fijada (pin) desplace correctamente a las siguientes.
+  initRollLinks();
   initHero();
   initFog();
   initManifesto();
+  initNeutral();
   initExterior();
   initThreshold();
   initInterior();

@@ -9,6 +9,7 @@ Página web inmersiva para SP FUMIGACION: fumigación y control de plagas, desin
 | — | **Preloader** | Contador real (imágenes críticas + tipografías) y telón que se abre. |
 | 01 | **Hero** | Las letras *SP* son una ventana recortada sobre la foto; al bajar, el zoom atraviesa la «P» y revela la imagen. |
 | — | **Compromiso** | Cada palabra se enciende al ritmo del scroll. |
+| — | **Neutralización** | Animación de miles de partículas: una cucaracha se forma, es escaneada, se disuelve en niebla durante la fumigación y renace como el escudo de SP, con panel de infestación de 100 % a 0 %. Las partículas se apartan del cursor. |
 | 02 | **Fumigación** | Recorrido horizontal: cucarachas, roedores, termitas, chinches, mosquitos, hormigas/arañas/alacranes y aves. |
 | — | **Transición** | Un arco se abre: del control de plagas a la limpieza. |
 | 03 | **Limpieza** | Imagen fija que cambia por servicio: hogares, oficinas, desinfección, tanques, tapicería y post-obra. |
